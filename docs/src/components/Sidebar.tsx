@@ -38,10 +38,10 @@ export default () => (
           <A href="/properties/id/" title="id" />
         </li>
         <li>
-          <A href="/properties/classname-style/" title="className" />
+          <A href="/properties/layer/" title="layer" />
         </li>
         <li>
-          <A href="/properties/classname-style/" title="style" />
+          <A href="/properties/svgProps/" title="svgProps" />
         </li>
       </ul>
       <A href="/tutorial/" title="Tutorial" upper margin />

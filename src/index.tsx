@@ -1,19 +1,17 @@
-import React from 'react'
+import React, { ReactNode, SVGAttributes } from 'react'
 
 const Goo = ({
   children,
-  className,
-  composite = false,
   intensity = 'medium',
   id = 'gooey-react',
-  style,
+  layer,
+  svgProps,
 }: {
-  children: React.ReactNode;
-  className?: string;
-  composite?: boolean;
+  children: ReactNode;
   intensity?: 'weak' | 'medium' | 'strong';
   id?: string;
-  style?: React.CSSProperties;
+  layer?: ReactNode,
+  svgProps?: SVGAttributes<{}>;
 }) => {
   const blur = intensity === 'weak' ? 8 : intensity === 'strong' ? 16 : 12
   const alpha = blur * 6
@@ -45,25 +43,20 @@ const Goo = ({
             <feColorMatrix
               values={`${r} ${g} ${b} ${a}`}
             />
-            {composite && (
-              <feComposite
-                data-testid="composite"
-                in="SourceGraphic"
-              ></feComposite>
-            )}
           </filter>
         </defs>
       </svg>
-      <div
-        className={className}
+      <svg
         data-testid="element"
-        style={{
-          ...style,
-          filter: `url(#${id})`,
-        }}
+        {...svgProps}
       >
-        {children}
-      </div>
+        <g style={{ filter: `url(#${id})` }}>
+          {children}
+        </g>
+        {layer && (
+          <g>{layer}</g>
+        )}
+      </svg>
     </>
   )
 }

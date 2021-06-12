@@ -5,6 +5,7 @@ import Tag from '../../components/Tag'
 import Example from '../../components/Example'
 import Code from '../../components/Code'
 import Goo from 'gooey-react'
+import Goo2 from '../../../../src'
 import P from '../../components/P'
 import Layout from '../../components/Layout'
 
@@ -39,7 +40,7 @@ export default () => (
     <P>As you can see, colors will not blend when you apply a composite.</P>
     <Divider />
     <div className="lg:grid lg:grid-cols-2 lg:gap-4 mb-6 lg:mb-8">
-      <PreviewTwo composite={false} id="example_two_left" margin />
+    <PreviewTwoTest id="example_two_left" margin />
       <PreviewTwo composite={true} id="example_two_right" />
     </div>
     <P>
@@ -94,6 +95,64 @@ const PreviewOne = ({
   </div>
 )
 
+const PreviewTwoTest = ({
+  id,
+  margin,
+}: {
+  id: string
+  margin?: boolean
+}) => (
+  <div
+    className={`
+    flex
+    flex-col
+    items-start
+    ${margin ? 'mb-8 md:mb-12 lg:mb-0' : ''}
+  `}
+  >
+    <Code>
+      <span className="text-blue-700">{'<'}</span>
+      <span className="text-yellow-700">{'Goo'}</span>
+      <span className="text-blue-700">{'>'}</span>
+      <span className="text-cool-gray-500 select-none"> … </span>
+      <span className="text-blue-700">{'</'}</span>
+      <span className="text-yellow-700">{'Goo'}</span>
+      <span className="text-blue-700">{'>'}</span>
+    </Code>
+    <Example>
+      <Goo2 id={id} svgProps={{ role: 'img', "aria-label": 'img', className: 'w-64 h-64' }}
+        layer={
+          <rect
+            x="20%"
+            y="47.5%"
+            width="60%"
+            height="25%"
+            fill="blue"
+          />
+        }
+      >
+        <circle
+          cx="50%"
+          cy="60%"
+          r="24"
+          fill="mediumturquoise"
+          style={{
+            animation: 'rise 1.5s ease-in-out infinite alternate',
+          }}
+        />
+        <rect
+          x="20%"
+          y="47.5%"
+          width="60%"
+          height="25%"
+          fill="blue"
+        />
+      </Goo2>
+    </Example>
+  </div>
+)
+
+
 const PreviewTwo = ({
   composite,
   id,
@@ -143,7 +202,7 @@ const PreviewTwo = ({
               y="47.5%"
               width="60%"
               height="25%"
-              fill="mediumturquoise"
+              fill="blue"
             />
           </g>
         </svg>
